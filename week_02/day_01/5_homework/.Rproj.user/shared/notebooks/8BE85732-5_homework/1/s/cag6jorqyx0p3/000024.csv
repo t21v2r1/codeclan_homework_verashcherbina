@@ -1,0 +1,4 @@
+"0","card_transactions <- semi_join(cards, transactions, by = с(""Card_Number"" = ""Credit_Card_ID""))
+"
+"2","Error in с(Card_Number = ""Credit_Card_ID"") : could not find function ""с""
+"
