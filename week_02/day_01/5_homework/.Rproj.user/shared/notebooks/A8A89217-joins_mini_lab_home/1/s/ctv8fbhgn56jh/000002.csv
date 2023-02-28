@@ -1,0 +1,5 @@
+"0","```r
+little_mermaid_id <- filter(movies, name == \"Little Mermaid, The\")
+little_mermaid_id %>% 
+pull(id)
+```"

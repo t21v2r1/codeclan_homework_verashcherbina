@@ -1,0 +1,66 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+actors <- read_csv("data/actors.csv")
+movies <- read_csv("data/movies.csv")
+roles <- read_csv("data/roles.csv")
+
+
+```
+
+```{r}
+little_mermaid_id <- filter(movies, name == "Little Mermaid, The")
+little_mermaid_id %>% 
+pull(id)
+```
+```{r}
+little_mermaid_roles <- filter(roles, movie_id == 192017)
+```
+```{r}
+little_mermaid_roles %>% 
+  left_join(actors, c("actor_id" = "id"))
+```
+
+```{r}
+little_mermaid_roles %>% 
+  inner_join(actors, c("actor_id" = "id"))
+```
+
+```{r}
+actors_more_than_once <- filter(actors, film_count > 1)
+  
+```
+```{r}
+actors_more_than_once %>% 
+  left_join(roles, by = c("id" = "actor_id")) %>% 
+  left_join(movies, by = c("movie_id" = "id"))
+```
+```{r}
+actors_more_than_once %>% 
+  left_join(roles, by = c("id" = "actor_id")) %>% 
+  left_join(movies, by = c("movie_id" = "id")) %>% 
+  mutate(rank = as.numeric(rank)) %>% 
+group_by(first_name, last_name) %>% 
+   summarise(
+    average_rank = mean(rank, na.rm = TRUE)
+  ) %>% 
+  ungroup %>% 
+  slice_max(average_rank, n = 3)
+```
+## The Busiest Actor
+```{r}
+actors %>% 
+ slice_max(film_count)
+
+movies %>% 
+left_join(roles, c("id" = "movie_id")) %>%
+filter(actor_id == "22591") %>% 
+select(name, year, role) 
+```
+
+
+

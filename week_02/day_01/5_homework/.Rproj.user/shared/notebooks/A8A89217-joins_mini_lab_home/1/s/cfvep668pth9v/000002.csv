@@ -1,0 +1,8 @@
+"0","```r
+library(tidyverse)
+actors <- read_csv(\"data/actors.csv\")
+movies <- read_csv(\"data/movies.csv\")
+roles <- read_csv(\"data/roles.csv\")
+
+
+```"

@@ -1,0 +1,9 @@
+"0","```r
+
+movies %>% 
+left_join(roles, c(\"id\" = \"movie_id\")) %>%
+filter(actor_id == \"22591\") %>% 
+select(name, year, role) 
+```"
+"1","Warning: Each row in `x` is expected to match at most 1 row in `y`.
+"

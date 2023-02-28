@@ -1,0 +1,4 @@
+"0","```r
+little_mermaid_roles %>% 
+  inner_join(actors, c(\"actor_id\" = \"id\"))
+```"

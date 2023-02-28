@@ -1,0 +1,5 @@
+"0","```r
+actors_more_than_once %>% 
+  left_join(roles, by = c(\"id\" = \"actor_id\")) %>% 
+  left_join(movies, by = c(\"movie_id\" = \"id\"))
+```"
