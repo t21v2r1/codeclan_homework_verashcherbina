@@ -1766,13 +1766,14 @@ display: none;
 <p>###tidyr</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6NiwibmNvbCI6NCwic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI2IMOXIDQiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFCbTJTVDAvQ01CVEF5OWpBTFlGZ3ZIandZSXhYTmphUXdFa094ZzlnTk9GbXVsRmhZYlpMMTRuZS9NaWVQWUN2VzB1MllaT3U3LzNlMzc3MTZXRTVkcFlPUXFpTlRNTkFiUXRFWkwwOFB3NW5DQWdvTFdRaVc1NmY0SFFCZ2dsN0FMdWpERTV3NS9rakx4ajVjMFZzMy9mbU5URHgvRUNDMmRGajVrMXJJSmlXSVJvNC92Z1lVNjluaFFtT3Rrb3h3eVFuMnJEbWhGQ3Q3RGF4SVArRnREbFpuYVFrbkFpbGRBVkxyemRZcTNhR3FjQVZVSE0rc1ZZQVFuMVpZM0dGaXJXNFZlZE4vYnovVWZvbFVxczJkNHZpZDVLcGhrMEZCNUQvbFlVWjRSOVl4SXhtZW1xU1J5eGhPVmZrVEJMeGxlcFJuRmVpd0RPbm9sSFA1bXpuNnBvOTJNWTNmQTZIdzIrenNTakJtVzVNUTJlRkJYYmZPTVNEdG0rRWRGbGFkb3NNK1pLc1JuQ0xOOEFncDdLVDFURGE1SFE3bkFTeVFtRXZWMC9Kbllwc2xqV05nOHBscVZ3ZFF0Y3hQYjZJQklja1VVb2ZybHpjMkUxNVRQV2ZkSUJtcm1BQ2F6OEhKcXRKY1RtMC93T0pLR3VKUVFNQUFBPT0ifQ== -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["hat_observations"],"name":[1],"type":["chr"],"align":["left"]},{"label":["hat_colour"],"name":[2],"type":["chr"],"align":["left"]},{"label":["hat_type"],"name":[3],"type":["chr"],"align":["left"]},{"label":["observation_count"],"name":[4],"type":["dbl"],"align":["right"]}],"data":[{"1":"25/10/2019","2":"black","3":"beret","4":"7"},{"1":"11/9/2019","2":"blue","3":"top hat","4":"10"},{"1":"4/12/2018","2":"green","3":"santa hat","4":"9"},{"1":"18/6/2018","2":"white","3":"beret","4":"9"},{"1":"26/9/2018","2":"black","3":"santa hat","4":"1"},{"1":"13/12/2018","2":"red","3":"santa hat","4":"6"}],"options":{"columns":{"min":{},"max":[10],"total":[4]},"rows":{"min":[10],"max":[10],"total":[6]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuaGF0X29ic2VydmF0aW9ucyA8LSByZWFkX2NzdihcImRhdGEvaGF0X29ic2VydmF0aW9ucy5jc3ZcIikgJT4lIFxuc2VwYXJhdGUob2JzZXJ2YXRpb24sIGMoXCJoYXRfY29sb3VyXCIsIFwiaGF0X3R5cGVcIiksIHNlcCA9IFwiLFwiKVxuaGVhZCAoaGF0X29ic2VydmF0aW9ucylcbmRhdGVfdW5pdGVkX2hhdF9vYnNlcnZhdGlvbnMgPC0gaGF0X29ic2VydmF0aW9ucyAlPiUgXG4gIHVuaXRlKGhhdF9vYnNlcnZhdGlvbnMsIGMoXCJkYXlcIiwgXCJtb250aFwiLCBcInllYXJcIiksIHNlcCA9XCIvXCIpXG5oZWFkKGRhdGVfdW5pdGVkX2hhdF9vYnNlcnZhdGlvbnMpXG5gYGAifQ== -->
+<pre class="r"><code>hat_observations &lt;- read_csv(&quot;data/hat_observations.csv&quot;) %&gt;% 
+separate(observation, c(&quot;hat_colour&quot;, &quot;hat_type&quot;), sep = &quot;,&quot;)
+head (hat_observations)
+date_united_hat_observations &lt;- hat_observations %&gt;% 
+  unite(hat_observations, c(&quot;day&quot;, &quot;month&quot;, &quot;year&quot;), sep =&quot;/&quot;)
+head(date_united_hat_observations)</code></pre>
+<!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
