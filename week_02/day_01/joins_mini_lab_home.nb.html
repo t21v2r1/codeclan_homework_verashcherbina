@@ -1754,62 +1754,131 @@ display: none;
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5hY3RvcnMgPC0gcmVhZF9jc3YoXCJkYXRhL2FjdG9ycy5jc3ZcIilcbm1vdmllcyA8LSByZWFkX2NzdihcImRhdGEvbW92aWVzLmNzdlwiKVxucm9sZXMgPC0gcmVhZF9jc3YoXCJkYXRhL3JvbGVzLmNzdlwiKVxuXG5cbmBgYCJ9 -->
-<pre class="r"><code>library(tidyverse)
-actors &lt;- read_csv(&quot;data/actors.csv&quot;)
-movies &lt;- read_csv(&quot;data/movies.csv&quot;)
-roles &lt;- read_csv(&quot;data/roles.csv&quot;)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5hY3RvcnMgPC0gcmVhZF9jc3YoXFxkYXRhL2FjdG9ycy5jc3ZcXClcbm1vdmllcyA8LSByZWFkX2NzdihcXGRhdGEvbW92aWVzLmNzdlxcKVxucm9sZXMgPC0gcmVhZF9jc3YoXFxkYXRhL3JvbGVzLmNzdlxcKVxuXG5cbmBgYFxuYGBgIn0= -->
+<pre class="r"><code>```r
+library(tidyverse)
+actors &lt;- read_csv(\data/actors.csv\)
+movies &lt;- read_csv(\data/movies.csv\)
+roles &lt;- read_csv(\data/roles.csv\)
 </code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGl0dGxlX21lcm1haWRfaWQgPC0gZmlsdGVyKG1vdmllcywgbmFtZSA9PSBcXExpdHRsZSBNZXJtYWlkXG5gYGAifQ== --&gt;
+
+```r
+```r
+little_mermaid_id &lt;- filter(movies, name == \Little Mermaid</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGl0dGxlX21lcm1haWRfaWQgPC0gZmlsdGVyKG1vdmllcywgbmFtZSA9PSBcIkxpdHRsZSBNZXJtYWlkLCBUaGVcIilcbmxpdHRsZV9tZXJtYWlkX2lkICU+JSBcbnB1bGwoaWQpXG5gYGAifQ== -->
-<pre class="r"><code>little_mermaid_id &lt;- filter(movies, name == &quot;Little Mermaid, The&quot;)
-little_mermaid_id %&gt;% 
-pull(id)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGl0dGxlX21lcm1haWRfcm9sZXMgPC0gZmlsdGVyKHJvbGVzLCBtb3ZpZV9pZCA9PSAxOTIwMTcpXG5gYGAifQ== -->
-<pre class="r"><code>little_mermaid_roles &lt;- filter(roles, movie_id == 192017)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGl0dGxlX21lcm1haWRfcm9sZXMgJT4lIFxuICBsZWZ0X2pvaW4oYWN0b3JzLCBjKFwiYWN0b3JfaWRcIiA9IFwiaWRcIikpXG5gYGAifQ== -->
-<pre class="r"><code>little_mermaid_roles %&gt;% 
-  left_join(actors, c(&quot;actor_id&quot; = &quot;id&quot;))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGl0dGxlX21lcm1haWRfcm9sZXMgJT4lIFxuICBpbm5lcl9qb2luKGFjdG9ycywgYyhcImFjdG9yX2lkXCIgPSBcImlkXCIpKVxuYGBgIn0= -->
-<pre class="r"><code>little_mermaid_roles %&gt;% 
-  inner_join(actors, c(&quot;actor_id&quot; = &quot;id&quot;))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWN0b3JzX21vcmVfdGhhbl9vbmNlIDwtIGZpbHRlcihhY3RvcnMsIGZpbG1fY291bnQgPiAxKVxuICBcbmBgYCJ9 -->
-<pre class="r"><code>actors_more_than_once &lt;- filter(actors, film_count &gt; 1)
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGl0dGxlX21lcm1haWRfcm9sZXMgPC0gZmlsdGVyKHJvbGVzLCBtb3ZpZV9pZCA9PSAxOTIwMTcpXG5gYGBcbmBgYCJ9 -->
+<pre class="r"><code>```r
+little_mermaid_roles &lt;- filter(roles, movie_id == 192017)</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGl0dGxlX21lcm1haWRfcm9sZXMgJT4lIFxuICBsZWZ0X2pvaW4oYWN0b3JzLCBjKFxcYWN0b3JfaWRcXCA9IFxcaWRcXCkpXG5gYGBcbmBgYCJ9 --&gt;
+
+```r
+```r
+little_mermaid_roles %&gt;% 
+  left_join(actors, c(\actor_id\ = \id\))</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxubGl0dGxlX21lcm1haWRfcm9sZXMgJT4lIFxuICBpbm5lcl9qb2luKGFjdG9ycywgYyhcXGFjdG9yX2lkXFwgPSBcXGlkXFwpKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+little_mermaid_roles %&gt;% 
+  inner_join(actors, c(\actor_id\ = \id\))</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYWN0b3JzX21vcmVfdGhhbl9vbmNlIDwtIGZpbHRlcihhY3RvcnMsIGZpbG1fY291bnQgPiAxKVxuICBcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+actors_more_than_once &lt;- filter(actors, film_count &gt; 1)
   </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWN0b3JzX21vcmVfdGhhbl9vbmNlICU+JSBcbiAgbGVmdF9qb2luKHJvbGVzLCBieSA9IGMoXCJpZFwiID0gXCJhY3Rvcl9pZFwiKSkgJT4lIFxuICBsZWZ0X2pvaW4obW92aWVzLCBieSA9IGMoXCJtb3ZpZV9pZFwiID0gXCJpZFwiKSlcbmBgYCJ9 -->
-<pre class="r"><code>actors_more_than_once %&gt;% 
-  left_join(roles, by = c(&quot;id&quot; = &quot;actor_id&quot;)) %&gt;% 
-  left_join(movies, by = c(&quot;movie_id&quot; = &quot;id&quot;))</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWN0b3JzX21vcmVfdGhhbl9vbmNlICU+JSBcbiAgbGVmdF9qb2luKHJvbGVzLCBieSA9IGMoXCJpZFwiID0gXCJhY3Rvcl9pZFwiKSkgJT4lIFxuICBsZWZ0X2pvaW4obW92aWVzLCBieSA9IGMoXCJtb3ZpZV9pZFwiID0gXCJpZFwiKSkgJT4lIFxuICBtdXRhdGUocmFuayA9IGFzLm51bWVyaWMocmFuaykpICU+JSBcbmdyb3VwX2J5KGZpcnN0X25hbWUsIGxhc3RfbmFtZSkgJT4lIFxuICAgc3VtbWFyaXNlKFxuICAgIGF2ZXJhZ2VfcmFuayA9IG1lYW4ocmFuaywgbmEucm0gPSBUUlVFKVxuICApICU+JSBcbiAgdW5ncm91cCAlPiUgXG4gIHNsaWNlX21heChhdmVyYWdlX3JhbmssIG4gPSAzKVxuYGBgIn0= -->
-<pre class="r"><code>actors_more_than_once %&gt;% 
-  left_join(roles, by = c(&quot;id&quot; = &quot;actor_id&quot;)) %&gt;% 
-  left_join(movies, by = c(&quot;movie_id&quot; = &quot;id&quot;)) %&gt;% 
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYWN0b3JzX21vcmVfdGhhbl9vbmNlICU+JSBcbiAgbGVmdF9qb2luKHJvbGVzLCBieSA9IGMoXFxpZFxcID0gXFxhY3Rvcl9pZFxcKSkgJT4lIFxuICBsZWZ0X2pvaW4obW92aWVzLCBieSA9IGMoXFxtb3ZpZV9pZFxcID0gXFxpZFxcKSlcbmBgYFxuYGBgIn0= --&gt;
+
+```r
+```r
+actors_more_than_once %&gt;% 
+  left_join(roles, by = c(\id\ = \actor_id\)) %&gt;% 
+  left_join(movies, by = c(\movie_id\ = \id\))</code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYWN0b3JzX21vcmVfdGhhbl9vbmNlICU+JSBcbiAgbGVmdF9qb2luKHJvbGVzLCBieSA9IGMoXFxpZFxcID0gXFxhY3Rvcl9pZFxcKSkgJT4lIFxuICBsZWZ0X2pvaW4obW92aWVzLCBieSA9IGMoXFxtb3ZpZV9pZFxcID0gXFxpZFxcKSkgJT4lIFxuICBtdXRhdGUocmFuayA9IGFzLm51bWVyaWMocmFuaykpICU+JSBcbmdyb3VwX2J5KGZpcnN0X25hbWUsIGxhc3RfbmFtZSkgJT4lIFxuICAgc3VtbWFyaXNlKFxuICAgIGF2ZXJhZ2VfcmFuayA9IG1lYW4ocmFuaywgbmEucm0gPSBUUlVFKVxuICApICU+JSBcbiAgdW5ncm91cCAlPiUgXG4gIHNsaWNlX21heChhdmVyYWdlX3JhbmssIG4gPSAzKVxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+actors_more_than_once %&gt;% 
+  left_join(roles, by = c(\id\ = \actor_id\)) %&gt;% 
+  left_join(movies, by = c(\movie_id\ = \id\)) %&gt;% 
   mutate(rank = as.numeric(rank)) %&gt;% 
 group_by(first_name, last_name) %&gt;% 
    summarise(
@@ -1817,48 +1886,73 @@ group_by(first_name, last_name) %&gt;%
   ) %&gt;% 
   ungroup %&gt;% 
   slice_max(average_rank, n = 3)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogRWFjaCByb3cgaW4gYHhgIGlzIGV4cGVjdGVkIHRvIG1hdGNoIGF0IG1vc3QgMSByb3cgaW4gYHlgLldhcm5pbmc6IFRoZXJlIHdhcyAxIHdhcm5pbmcgaW4gYG11dGF0ZSgpYC5cbuKEuSBJbiBhcmd1bWVudDogYHJhbmsgPSBhcy5udW1lcmljKHJhbmspYC5cbkNhdXNlZCBieSB3YXJuaW5nOlxuISBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICdmaXJzdF9uYW1lJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgIGFyZ3VtZW50LlxuIn0= -->
-<pre><code>Warning: Each row in `x` is expected to match at most 1 row in `y`.Warning: There was 1 warning in `mutate()`.
-ℹ In argument: `rank = as.numeric(rank)`.
-Caused by warning:
-! NAs introduced by coercion`summarise()` has grouped output by &#39;first_name&#39;. You can override using the `.groups` argument.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyIzIMOXIDMiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFCbDFRVFUvRE1BejErc0hVYWh0SS9JSEJDUTd0aFFNY0o0UW1RT3lDUU5wdE1tMWFxbmJKNUtWODNQampyQ1JaSTdGWWFtTS8rL25aZnI1YlhzWExHQUI4Q0R3UC9GQzVFTDYrekpNYlVJZ0tCaEJBcE44dlZYUnFLZ0ZPOWd5VGlCZUNTdVRUaTRmTEhvbWVrT2o3SHhBc2tHcUhOcHdUWTJ2a2ZYaDBMNXFjMldoMEt3Um4wOGVXVjRKVVBOSEUyVGtZbTUwVnh1enJEQnB5WExPdE8yUlIwVmF1ZE1vTzJlQWhNTUlQUmxpeUZTR3ZuWjRSaWMvVTloMnJ6L3RSdjY3cmZsM3hUTFcxNGhhTWM1U1lGcVMxQUhZT1pTZzJzaEpja1R4OTN0QWhEOGdCamx1dUo4bVQ3TDNsZFhLdEJVeDZiK1BlOXc5OUxlbDFmYXZRSHAzeHN1TDJBR0dEYjZ6cGc0bmEyQ3ljYnFqaTBtNmkwRzBxaFVSYkYyZWlzWWpaRFhaL3d1T1YvMVVDQUFBPSJ9 -->
-<div data-pagedtable="false">
-<script data-pagedtable-source type="application/json">
-{"columns":[{"label":["first_name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["last_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["average_rank"],"name":[3],"type":["dbl"],"align":["right"]}],"data":[{"1":"Morgan (I)","2":"Freeman","3":"9.0"},{"1":"Larry (I)","2":"Holden","3":"8.7"},{"1":"Mark","2":"Boone Junior","3":"8.7"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[3]},"pages":{}}}
-  </script>
-</div>
-<!-- rnb-frame-end -->
-<!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<div id="the-busiest-actor" class="section level2">
-<h2>The Busiest Actor</h2>
-<!-- rnb-text-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYWN0b3JzICU+JSBcbiBzbGljZV9tYXgoZmlsbV9jb3VudClcbmBgYCJ9 -->
-<pre class="r"><code>actors %&gt;% 
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogRWFjaCByb3cgaW4gYHhgIGlzIGV4cGVjdGVkIHRvIG1hdGNoIGF0IG1vc3QgMSByb3cgaW4gYHlgLldhcm5pbmc6IFRoZXJlIHdhcyAxIHdhcm5pbmcgaW4gYG11dGF0ZSgpYC5cbuKEuSBJbiBhcmd1bWVudDogYHJhbmsgPSBhcy5udW1lcmljKHJhbmspYC5cbkNhdXNlZCBieSB3YXJuaW5nOlxuISBOQXMgaW50cm9kdWNlZCBieSBjb2VyY2lvbmBzdW1tYXJpc2UoKWAgaGFzIGdyb3VwZWQgb3V0cHV0IGJ5ICdmaXJzdF9uYW1lJy4gWW91IGNhbiBvdmVycmlkZSB1c2luZyB0aGUgYC5ncm91cHNgIGFyZ3VtZW50LlxuIn0= --&gt;
+</code></pre>
+<p>Warning: Each row in <code>x</code> is expected to match at most 1
+row in <code>y</code>.Warning: There was 1 warning in
+<code>mutate()</code>. ℹ In argument:
+<code>rank = as.numeric(rank)</code>. Caused by warning: ! NAs
+introduced by coercion<code>summarise()</code> has grouped output by
+‘first_name’. You can override using the <code>.groups</code>
+argument.</p>
+<pre><code>
+
+
+&lt;!-- rnb-output-end --&gt;
+
+&lt;!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6MywibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6IjMgw5cgMyJ9fSwicmRmIjoiSDRzSUFBQUFBQUFBQmwxUVRVL0RNQXoxK3NIVWFodEkvSUhCQ1E3dGhRTWNKNFFtUU95Q1FOcHRNbTFhcW5iSjVLVjgzUGpqckNSWkk3RllhbU0vKy9uWmZyNWJYc1hMR0FCOENEd1AvRkM1RUw2K3pKTWJVSWdLQmhCQXBOOHZWWFJxS2dGTzlneVRpQmVDU3VUVGk0ZkxIb21la09qN0h4QXNrR3FITnB3VFkydmtmWGgwTDVxYzJXaDBLd1JuMDhlV1Y0SlVQTkhFMlRrWW01MFZ4dXpyREJweVhMT3RPMlJSMFZhdWRNb08yZUFoTU1JUFJsaXlGU0d2blo0UmljL1U5aDJyei90UnY2N3JmbDN4VExXMTRoYU1jNVNZRnFTMUFIWU9aU2cyc2hKY2tUeDkzdEFoRDhnQmpsdXVKOG1UN0wzbGRYS3RCVXg2YitQZTl3OTlMZWwxZmF2UUhwM3hzdUwyQUdHRGI2enBnNG5hMkN5Y2JxamkwbTZpMEcwcWhVUmJGMmVpc1lqWkRYWi93dU9WLzFVQ0FBQT0ifQ== --&gt;
+
+&lt;div data-pagedtable=&quot;false&quot;&gt;
+  &lt;script data-pagedtable-source type=&quot;application/json&quot;&gt;
+{&quot;columns&quot;:[{&quot;label&quot;:[&quot;first_name&quot;],&quot;name&quot;:[1],&quot;type&quot;:[&quot;chr&quot;],&quot;align&quot;:[&quot;left&quot;]},{&quot;label&quot;:[&quot;last_name&quot;],&quot;name&quot;:[2],&quot;type&quot;:[&quot;chr&quot;],&quot;align&quot;:[&quot;left&quot;]},{&quot;label&quot;:[&quot;average_rank&quot;],&quot;name&quot;:[3],&quot;type&quot;:[&quot;dbl&quot;],&quot;align&quot;:[&quot;right&quot;]}],&quot;data&quot;:[{&quot;1&quot;:&quot;Morgan (I)&quot;,&quot;2&quot;:&quot;Freeman&quot;,&quot;3&quot;:&quot;9.0&quot;},{&quot;1&quot;:&quot;Larry (I)&quot;,&quot;2&quot;:&quot;Holden&quot;,&quot;3&quot;:&quot;8.7&quot;},{&quot;1&quot;:&quot;Mark&quot;,&quot;2&quot;:&quot;Boone Junior&quot;,&quot;3&quot;:&quot;8.7&quot;}],&quot;options&quot;:{&quot;columns&quot;:{&quot;min&quot;:{},&quot;max&quot;:[10],&quot;total&quot;:[3]},&quot;rows&quot;:{&quot;min&quot;:[10],&quot;max&quot;:[10],&quot;total&quot;:[3]},&quot;pages&quot;:{}}}
+  &lt;/script&gt;
+&lt;/div&gt;
+
+&lt;!-- rnb-frame-end --&gt;
+
+&lt;!-- rnb-chunk-end --&gt;
+
+
+&lt;!-- rnb-text-begin --&gt;
+
+## The Busiest Actor
+
+&lt;!-- rnb-text-end --&gt;
+
+
+&lt;!-- rnb-chunk-begin --&gt;
+
+
+&lt;!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuYGBgclxuYWN0b3JzICU+JSBcbiBzbGljZV9tYXgoZmlsbV9jb3VudClcbmBgYFxuYGBgclxuXG5tb3ZpZXMgJT4lIFxubGVmdF9qb2luKHJvbGVzLCBjKFxcaWRcXCA9IFxcbW92aWVfaWRcXCkpICU+JVxuZmlsdGVyKGFjdG9yX2lkID09IFxcMjI1OTFcXCkgJT4lIFxuc2VsZWN0KG5hbWUsIHllYXIsIHJvbGUpIFxuYGBgXG5gYGAifQ== --&gt;
+
+```r
+```r
+actors %&gt;% 
  slice_max(film_count)</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInNwZWNfdGJsX2RmIiwidGJsX2RmIiwidGJsIiwiZGF0YS5mcmFtZSJdLCJucm93IjoxLCJuY29sIjo1LCJzdW1tYXJ5Ijp7IkEgdGliYmxlIjpbIjEgw5cgNSJdfX0sInJkZiI6Ikg0c0lBQUFBQUFBQUJsMlF3VTRESVJDR1o3ZWxaa2xhbS9nR3ZlOWVOTWFqTWNhTDhXSTA2YTFCbGxZaWhZWmwxYU9QNWxQNE9LM0RMbWlYU1lEaFk0Wi9aaDV2bCtkMFNRRmdCT004aHhGQkY4anowMTE1QlVqd2tzRVlDbjkrWXRDWmY4VTE4K0Q2NS9RYmVwc2ZCWko3OFM1MUNtOFlOeW5NSHY2K1dvU1BocHBFczYxb1FoWUpNSmQxOE9oYTJzYXRmRkFnaFdKRE1Oa0lYUXY3bjZDMksyNWE3Uktsd3BxUEtxcE52Y29YYmdlMHRDU09FckdrQ0duTkhLdlcxdXNDN0pPVUU3TnowbWhNeXVQOEJsT3dDWmkzMmxkU2wveTExVy9seGFWWDZONTdtd1kvTy9KSnI1a2ZrbUZOaE41SUhhZEJGSHNSS2x4bTJITFhjYld6RWdjU1drSGFWTTQ0RnVNb055cVNyam5ZL3dKZVNKTi9Od0lBQUE9PSJ9 -->
+<pre class="r"><code>
+movies %&gt;% 
+left_join(roles, c(\id\ = \movie_id\)) %&gt;%
+filter(actor_id == \22591\) %&gt;% 
+select(name, year, role) </code></pre>
+<pre><code>
+&lt;!-- rnb-source-end --&gt;
+
+&lt;!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogRWFjaCByb3cgaW4gYHhgIGlzIGV4cGVjdGVkIHRvIG1hdGNoIGF0IG1vc3QgMSByb3cgaW4gYHlgLlxuIn0= --&gt;
+</code></pre>
+<p>Warning: Each row in <code>x</code> is expected to match at most 1
+row in <code>y</code>. ```</p>
+<!-- rnb-output-end -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInNwZWNfdGJsX2RmIiwidGJsX2RmIiwidGJsIiwiZGF0YS5mcmFtZSJdLCJucm93IjoxLCJuY29sIjo1LCJzdW1tYXJ5Ijp7IkEgdGliYmxlIjoiMSDDlyA1In19LCJyZGYiOiJINHNJQUFBQUFBQUFCbDJRd1U0RElSQ0daN2VsWmtsYW0vZ0d2ZTllTk1hak1jYUw4V0kwNmExQmxsWWloWVpsMWFPUDVsUDRPSzNETG1pWFNZRGhZNFovWmg1dmwrZDBTUUZnQk9NOGh4RkJGOGp6MDExNUJVandrc0VZQ245K1l0Q1pmOFUxOCtENjUvUWJlcHNmQlpKNzhTNTFDbThZTnluTUh2NitXb1NQaHBwRXM2MW9RaFlKTUpkMThPaGEyc2F0ZkZBZ2hXSkRNTmtJWFF2N242QzJLMjVhN1JLbHdwcVBLcXBOdmNvWGJnZTB0Q1NPRXJHa0NHbk5IS3ZXMXVzQzdKT1VFN056MG1oTXl1UDhCbE93Q1ppMzJsZFNsL3kxMVcvbHhhVlg2TjU3bXdZL08vSkpyNWtma21GTmhONUlIYWRCRkhzUktseG0ySExYY2JXekVnY1NXa0hhVk00NEZ1TW9OeXFTcmpuWS93SmVTSk4vTndJQUFBPT0ifQ== -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["id"],"name":[1],"type":["dbl"],"align":["right"]},{"label":["first_name"],"name":[2],"type":["chr"],"align":["left"]},{"label":["last_name"],"name":[3],"type":["chr"],"align":["left"]},{"label":["gender"],"name":[4],"type":["chr"],"align":["left"]},{"label":["film_count"],"name":[5],"type":["dbl"],"align":["right"]}],"data":[{"1":"22591","2":"Kevin","3":"Bacon","4":"M","5":"9"}],"options":{"columns":{"min":{},"max":[10],"total":[5]},"rows":{"min":[10],"max":[10],"total":[1]},"pages":{}}}
   </script>
 </div>
 <!-- rnb-frame-end -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuXG5tb3ZpZXMgJT4lIFxubGVmdF9qb2luKHJvbGVzLCBjKFwiaWRcIiA9IFwibW92aWVfaWRcIikpICU+JVxuZmlsdGVyKGFjdG9yX2lkID09IFwiMjI1OTFcIikgJT4lIFxuc2VsZWN0KG5hbWUsIHllYXIsIHJvbGUpIFxuYGBgIn0= -->
-<pre class="r"><code>
-movies %&gt;% 
-left_join(roles, c(&quot;id&quot; = &quot;movie_id&quot;)) %&gt;%
-filter(actor_id == &quot;22591&quot;) %&gt;% 
-select(name, year, role) </code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiV2FybmluZzogRWFjaCByb3cgaW4gYHhgIGlzIGV4cGVjdGVkIHRvIG1hdGNoIGF0IG1vc3QgMSByb3cgaW4gYHlgLlxuIn0= -->
-<pre><code>Warning: Each row in `x` is expected to match at most 1 row in `y`.</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6OSwibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6WyI5IMOXIDMiXX19LCJyZGYiOiJINHNJQUFBQUFBQUFCbDFTVFcvYU1CaDJBMW1WRkRxa1hYdDRUOXNGSWxXZHBoMTJBTUZZMVE1dEFxcjJhb0lwRm83ZnlER2w5TFJmc3YyOS9ZUGR5dXhnMHlxV25PZk40K2Y5dE1lRHU0djRMaWFFMUVnOUNFZ3ROQ1lKYjZiRHptZGlHUE56Uk9va3N2aG9STzlLSlNFdHN5TjMwT2hKbmxFQmw3Z3VtT09pWG81Q0lKeGZPT0x0a0czZ0crSWNSa3kyb2VkMVEwUXRFQStPOGFYMTI4Q0lTc2ZVcm9iWFB0Tm9XMmlld3BnL01PVzRzNStDU2xhMFlhb29sd1c4aDk1YVk0WXpMbGpoTktjVHpSWGdBcjZtU3pTc1lXenU3dSsvdGx2Uy9kTjJDQTZKdzY3RE00ZmZIVFljZmlGdXZaN0hTWC9KY3hod0lRNUZOcTVvdW9MSmh0OHpwZjFFK2pUWENaUW5ZeXg4cmMweGt6QksrNmd5YytLMUV6YWpwblVxb1crNjlNTTZ2VFZKT0lNZkg2NFpXM2oyWk1LTWJzQWVYb1R4bEQ1eVVEUTlWQlJQTVlOYnJwOVcyOG85aDVKbTVZeGErMWRSa25WTGVudkxxQTlUVnloWUpVQ2tjSlA0SUUyemcxL21zOXZ0L2xVenBZSVdQcE1uNHpuVk5Ga29tNCtRNTRyTE1lYWFvelJPZ1gyS1ljWDVTRldJMWxyYVN1YWRkTG1XcTg3SFR6WkRlYjVmVFdkSHIremFQbWV3YzdGQ0Yrc05rL2N2SXcwRm5USGhMOEswWEhhYzVJcExmOE94WVl0RW82WmVGNmNvUEZNMlI1Ny9BektHQ2cyQ0F3QUEifQ== -->
+<!-- rnb-frame-begin eyJtZXRhZGF0YSI6eyJjbGFzc2VzIjpbInRibF9kZiIsInRibCIsImRhdGEuZnJhbWUiXSwibnJvdyI6OSwibmNvbCI6Mywic3VtbWFyeSI6eyJBIHRpYmJsZSI6Ijkgw5cgMyJ9fSwicmRmIjoiSDRzSUFBQUFBQUFBQmwxU1RXL2FNQmgyQTFtVkZEcWtYWHQ0VDlzRklsV2RwaDEyQU1GWTFRNXRBcXIyYW9JcEZvN2Z5REdsOUxSZnN2MjkvWVBkeXV4ZzB5cVduT2ZONCtmOXRNZUR1NHY0TGlhRTFFZzlDRWd0TkNZSmI2YkR6bWRpR1BOelJPb2tzdmhvUk85S0pTRXRzeU4zME9oSm5sRUJsN2d1bU9PaVhvNUNJSnhmT09MdGtHM2dHK0ljUmt5Mm9lZDFRMFF0RUErTzhhWDEyOENJU3NmVXJvYlhQdE5vVzJpZXdwZy9NT1c0czUrQ1NsYTBZYW9vbHdXOGg5NWFZNFl6TGxqaE5LY1R6UlhnQXI2bVN6U3NZV3p1N3UrL3RsdlMvZE4yQ0E2Snc2N0RNNGZmSFRZY2ZpRnV2WjdIU1gvSmN4aHdJUTVGTnE1b3VvTEpodDh6cGYxRStqVFhDWlFuWXl4OHJjMHhrekJLKzZneWMrSzFFemFqcG5VcW9XKzY5TU02dlRWSk9JTWZINjRaVzNqMlpNS01ic0FlWG9UeGxENXlVRFE5VkJSUE1ZTmJycDlXMjhvOWg1Sm01WXhhKzFkUmtuVkxlbnZMcUE5VFZ5aFlKVUNrY0pQNElFMnpnMS9tczl2dC9sVXpwWUlXUHBNbjR6blZORmtvbTQrUTU0ckxNZWFhb3pST2dYMktZY1g1U0ZXSTFscmFTdWFkZExtV3E4N0hUelpEZWI1ZlRXZEhyK3phUG1ld2M3RkNGK3NOay9jdkl3MEZuVEhoTDhLMFhIYWM1SXBMZjhPeFlZdEVvNlplRjZjb1BGTTJSNTcvQXpLR0NnMkNBd0FBIn0= -->
 <div data-pagedtable="false">
 <script data-pagedtable-source type="application/json">
 {"columns":[{"label":["name"],"name":[1],"type":["chr"],"align":["left"]},{"label":["year"],"name":[2],"type":["dbl"],"align":["right"]},{"label":["role"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"Animal House","2":"1978","3":"Chip Diller"},{"1":"Apollo 13","2":"1995","3":"Jack Swigert"},{"1":"Few Good Men, A","2":"1992","3":"Capt. Jack Ross"},{"1":"Footloose","2":"1984","3":"Ren McCormack"},{"1":"Hollow Man","2":"2000","3":"Sebastian Caine"},{"1":"JFK","2":"1991","3":"Willie O'Keefe"},{"1":"Mystic River","2":"2003","3":"Sean Devine"},{"1":"Planes, Trains & Automobiles","2":"1987","3":"Taxi racer"},{"1":"Stir of Echoes","2":"1999","3":"Tom Witzky"}],"options":{"columns":{"min":{},"max":[10],"total":[3]},"rows":{"min":[10],"max":[10],"total":[9]},"pages":{}}}
@@ -1866,19 +1960,10 @@ select(name, year, role) </code></pre>
 </div>
 <!-- rnb-frame-end -->
 <!-- rnb-chunk-end -->
-<!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxudGVtcFtcIjFcIl0gKyA1XG5gYGAifQ== -->
-<pre class="r"><code>temp[&quot;1&quot;] + 5</code></pre>
-<!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoiRXJyb3I6IG9iamVjdCAndGVtcCcgbm90IGZvdW5kXG4ifQ== -->
-<pre><code>Error: object &#39;temp&#39; not found</code></pre>
-<!-- rnb-output-end -->
-<!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
-</div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCmxpYnJhcnkodGlkeXZlcnNlKQ0KYWN0b3JzIDwtIHJlYWRfY3N2KCJkYXRhL2FjdG9ycy5jc3YiKQ0KbW92aWVzIDwtIHJlYWRfY3N2KCJkYXRhL21vdmllcy5jc3YiKQ0Kcm9sZXMgPC0gcmVhZF9jc3YoImRhdGEvcm9sZXMuY3N2IikNCg0KDQpgYGANCg0KYGBge3J9DQpsaXR0bGVfbWVybWFpZF9pZCA8LSBmaWx0ZXIobW92aWVzLCBuYW1lID09ICJMaXR0bGUgTWVybWFpZCwgVGhlIikNCmxpdHRsZV9tZXJtYWlkX2lkICU+JSANCnB1bGwoaWQpDQpgYGANCmBgYHtyfQ0KbGl0dGxlX21lcm1haWRfcm9sZXMgPC0gZmlsdGVyKHJvbGVzLCBtb3ZpZV9pZCA9PSAxOTIwMTcpDQpgYGANCmBgYHtyfQ0KbGl0dGxlX21lcm1haWRfcm9sZXMgJT4lIA0KICBsZWZ0X2pvaW4oYWN0b3JzLCBjKCJhY3Rvcl9pZCIgPSAiaWQiKSkNCmBgYA0KDQpgYGB7cn0NCmxpdHRsZV9tZXJtYWlkX3JvbGVzICU+JSANCiAgaW5uZXJfam9pbihhY3RvcnMsIGMoImFjdG9yX2lkIiA9ICJpZCIpKQ0KYGBgDQoNCmBgYHtyfQ0KYWN0b3JzX21vcmVfdGhhbl9vbmNlIDwtIGZpbHRlcihhY3RvcnMsIGZpbG1fY291bnQgPiAxKQ0KICANCmBgYA0KYGBge3J9DQphY3RvcnNfbW9yZV90aGFuX29uY2UgJT4lIA0KICBsZWZ0X2pvaW4ocm9sZXMsIGJ5ID0gYygiaWQiID0gImFjdG9yX2lkIikpICU+JSANCiAgbGVmdF9qb2luKG1vdmllcywgYnkgPSBjKCJtb3ZpZV9pZCIgPSAiaWQiKSkNCmBgYA0KYGBge3J9DQphY3RvcnNfbW9yZV90aGFuX29uY2UgJT4lIA0KICBsZWZ0X2pvaW4ocm9sZXMsIGJ5ID0gYygiaWQiID0gImFjdG9yX2lkIikpICU+JSANCiAgbGVmdF9qb2luKG1vdmllcywgYnkgPSBjKCJtb3ZpZV9pZCIgPSAiaWQiKSkgJT4lIA0KICBtdXRhdGUocmFuayA9IGFzLm51bWVyaWMocmFuaykpICU+JSANCmdyb3VwX2J5KGZpcnN0X25hbWUsIGxhc3RfbmFtZSkgJT4lIA0KICAgc3VtbWFyaXNlKA0KICAgIGF2ZXJhZ2VfcmFuayA9IG1lYW4ocmFuaywgbmEucm0gPSBUUlVFKQ0KICApICU+JSANCiAgdW5ncm91cCAlPiUgDQogIHNsaWNlX21heChhdmVyYWdlX3JhbmssIG4gPSAzKQ0KYGBgDQojIyBUaGUgQnVzaWVzdCBBY3Rvcg0KYGBge3J9DQphY3RvcnMgJT4lIA0KIHNsaWNlX21heChmaWxtX2NvdW50KQ0KDQptb3ZpZXMgJT4lIA0KbGVmdF9qb2luKHJvbGVzLCBjKCJpZCIgPSAibW92aWVfaWQiKSkgJT4lDQpmaWx0ZXIoYWN0b3JfaWQgPT0gIjIyNTkxIikgJT4lIA0Kc2VsZWN0KG5hbWUsIHllYXIsIHJvbGUpIA0KYGBgDQpgYGB7cn0NCnRlbXBbIjEiXSArIDUNCmBgYA0KDQoNCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpgYGB7cn0NCmxpYnJhcnkodGlkeXZlcnNlKQ0KYWN0b3JzIDwtIHJlYWRfY3N2KCJkYXRhL2FjdG9ycy5jc3YiKQ0KbW92aWVzIDwtIHJlYWRfY3N2KCJkYXRhL21vdmllcy5jc3YiKQ0Kcm9sZXMgPC0gcmVhZF9jc3YoImRhdGEvcm9sZXMuY3N2IikNCg0KDQpgYGANCg0KYGBge3J9DQpsaXR0bGVfbWVybWFpZF9pZCA8LSBmaWx0ZXIobW92aWVzLCBuYW1lID09ICJMaXR0bGUgTWVybWFpZCwgVGhlIikNCmxpdHRsZV9tZXJtYWlkX2lkICU+JSANCnB1bGwoaWQpDQpgYGANCmBgYHtyfQ0KbGl0dGxlX21lcm1haWRfcm9sZXMgPC0gZmlsdGVyKHJvbGVzLCBtb3ZpZV9pZCA9PSAxOTIwMTcpDQpgYGANCmBgYHtyfQ0KbGl0dGxlX21lcm1haWRfcm9sZXMgJT4lIA0KICBsZWZ0X2pvaW4oYWN0b3JzLCBjKCJhY3Rvcl9pZCIgPSAiaWQiKSkNCmBgYA0KDQpgYGB7cn0NCmxpdHRsZV9tZXJtYWlkX3JvbGVzICU+JSANCiAgaW5uZXJfam9pbihhY3RvcnMsIGMoImFjdG9yX2lkIiA9ICJpZCIpKQ0KYGBgDQoNCmBgYHtyfQ0KYWN0b3JzX21vcmVfdGhhbl9vbmNlIDwtIGZpbHRlcihhY3RvcnMsIGZpbG1fY291bnQgPiAxKQ0KICANCmBgYA0KYGBge3J9DQphY3RvcnNfbW9yZV90aGFuX29uY2UgJT4lIA0KICBsZWZ0X2pvaW4ocm9sZXMsIGJ5ID0gYygiaWQiID0gImFjdG9yX2lkIikpICU+JSANCiAgbGVmdF9qb2luKG1vdmllcywgYnkgPSBjKCJtb3ZpZV9pZCIgPSAiaWQiKSkNCmBgYA0KYGBge3J9DQphY3RvcnNfbW9yZV90aGFuX29uY2UgJT4lIA0KICBsZWZ0X2pvaW4ocm9sZXMsIGJ5ID0gYygiaWQiID0gImFjdG9yX2lkIikpICU+JSANCiAgbGVmdF9qb2luKG1vdmllcywgYnkgPSBjKCJtb3ZpZV9pZCIgPSAiaWQiKSkgJT4lIA0KICBtdXRhdGUocmFuayA9IGFzLm51bWVyaWMocmFuaykpICU+JSANCmdyb3VwX2J5KGZpcnN0X25hbWUsIGxhc3RfbmFtZSkgJT4lIA0KICAgc3VtbWFyaXNlKA0KICAgIGF2ZXJhZ2VfcmFuayA9IG1lYW4ocmFuaywgbmEucm0gPSBUUlVFKQ0KICApICU+JSANCiAgdW5ncm91cCAlPiUgDQogIHNsaWNlX21heChhdmVyYWdlX3JhbmssIG4gPSAzKQ0KYGBgDQojIyBUaGUgQnVzaWVzdCBBY3Rvcg0KYGBge3J9DQphY3RvcnMgJT4lIA0KIHNsaWNlX21heChmaWxtX2NvdW50KQ0KDQptb3ZpZXMgJT4lIA0KbGVmdF9qb2luKHJvbGVzLCBjKCJpZCIgPSAibW92aWVfaWQiKSkgJT4lDQpmaWx0ZXIoYWN0b3JfaWQgPT0gIjIyNTkxIikgJT4lIA0Kc2VsZWN0KG5hbWUsIHllYXIsIHJvbGUpIA0KYGBgDQoNCg0KDQo=</div>
 
 
 
