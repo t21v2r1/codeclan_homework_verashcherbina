@@ -14,7 +14,7 @@ cards_and_customers <- left_join(cards, customers, by = "Cust_ID")
 #glimpse(cards_and_customers)  -  ## number of rows is equal to number of cards available: 500
 fraud_transactions <- left_join(frauds, transactions, by = "Transaction_ID") 
 # number of entries if equal to number of frauds detected: 109
-##### !!!!!!! card_transactions <- semi_join(cards, transactions, by = c("Card_Number" = "Credit_Card_ID"))
+card_transactions <- semi_join(cards, transactions, by = c("Card_Number" = "Credit_Card_ID"))
 ```
 
 ###tidyr
