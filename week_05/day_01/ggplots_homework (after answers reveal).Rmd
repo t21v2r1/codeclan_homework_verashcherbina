@@ -89,7 +89,11 @@ qb_competitors %>%
     title = "Annual sales of personal fitness trackers over the last 5 years\n (broken down by company)",
     )+
   theme_bw()+
-  theme(axis.text=element_text(size=9), axis.title=element_text(size=12), plot.title = element_text(size = 14))
+  theme(axis.text=element_text(size=9), axis.title=element_text(size=12), plot.title = element_text(size = 14))+
+ #very cool thing to revome the padding at the beginning of x axis
+   #coord_cartesian(expand=FALSE)
+#another option: 
+  #theme_minimal()
 ```
 
 
@@ -114,9 +118,13 @@ qb_competitors %>%
 Now the company wants to compare the number of steps that their device counts vs. their competitors. Make a line graph of the number of steps throughout time, and use faceting to compare between companies and people. The data for this is in qb_device_data.
 
 ```{r}
-qb_device_data %>% 
-ggplot(aes(x=hours, y=counts, group=device, colour=id))+
+qb_devices <- 
+mutate(qb_device_data, decimal_hour = hours + (mins/60))
+
+qb_devices %>% 
+ggplot(aes(x=decimal_hour, y=counts))+
   geom_line()+
-  facet_wrap(~device, nrow = 5)
+  facet_grid(id ~device)
+#remember the difference between facet grid and facet wrap
 ```
 
