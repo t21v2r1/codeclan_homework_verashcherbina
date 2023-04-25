@@ -1,0 +1,108 @@
+---
+title: "Probability Consolidation Questions"
+output: html_notebook
+---
+```{r setup}
+library(tidyverse)
+library(gtools)
+source("prob.R")
+
+```
+
+Question 1.
+If I roll a six-sided dice once, what is the probability of getting a number less than 5?
+
+# p = n(event_outcomes)/ n(total_outcomes)
+p = 4/6 = 2/3
+
+Question 2.
+How many outcomes are there in the sample space of an experiment in which we toss three dice?
+
+
+```{r}
+s_three_dice <- rolldie(3, nsides = 6)
+s_three_dice
+```
+
+6*6*6 = 216
+
+Question 3.
+In an experiment where we roll four dice:
+1) how many outcomes are in the event where the total of the four dice equals 5, 6, or 7?
+2) what is the probability of this event?
+3) what assumptions do we apply in answering part ii?
+```{r}
+s_four_dice_5 <- rolldie(4, nsides = 6) %>%  
+  mutate(total = X1 + X2 + X3 + X4) %>% 
+  filter(total==5)
+nrow(s_four_dice_5)
+```
+Answer: 4 outcomes
+```{r}
+s_four_dice_6 <- rolldie(4, nsides = 6) %>%  
+  mutate(total = X1 + X2 + X3 + X4) %>% 
+  filter(total==6)
+nrow(s_four_dice_6)
+```
+Answer: 10 outcomes
+```{r}
+s_four_dice_7 <- rolldie(4, nsides = 6) %>%  
+  mutate(total = X1 + X2 + X3 + X4) %>% 
+  filter(total==7)
+nrow(s_four_dice_7)
+```
+Answer: 20 outcomes
+
+```{r}
+s_four_dice_567 <- rolldie(4, nsides = 6) %>%  
+  mutate(total = X1 + X2 + X3 + X4) %>% 
+  filter(total== 5 | total== 6 | total== 7)
+nrow(s_four_dice_567)
+```
+answer: 34 outcomes
+
+Question 3:
+2) what is the probability of this event?
+
+```{r}
+s_four_dice_total <- rolldie(4, nsides = 6) 
+p <- nrow(s_four_dice_567)/nrow(s_four_dice_total)
+p
+```
+Answer: 34/1296 = 0.02623457
+
+
+Question 4.
+Five chairs are placed in a row in a room, along with five people of differing height. The people sit down randomly on the chairs. What is the probability that they sit in order of decreasing height, left to right?
+```{r}
+people <- c(1,2,3,4,5)
+chairs <- as_tibble(permutations(n=5, r=5, v=people, repeats.allowed = FALSE)) 
+ordered_heights <- chairs %>% 
+ filter(V1 ==5, V2 == 4, V3 == 3, V4 == 2, V5 == 1)
+
+p= nrow(ordered_heights)/nrow(chairs)
+p
+```
+Answer: 1/120 = 0.008333333
+
+Question 5
+I roll six dice:
+1) what is the probability I see the numbers 6, 5, 4, 3, 2 and 1 in order on the dice, left to right?
+2) what is the probability I see one each of the numbers 6, 5, 4, 3, 2 and 1 on the dice regardless of order?
+
+```{r}
+roll1 <- rolldie(6, nsides = 6)
+roll2 <- roll1 %>% 
+ filter(X1 == 6, X2 == 5, X3 == 4, X4 == 3, X5 == 2, X6 == 1)
+p= nrow(roll2)/nrow(roll1)
+p
+```
+Answer 1) probability of this event is only 1/46,656 = 0.00002143347
+
+```{r}
+
+dice <- c(1,2,3,4,5,6)
+results <- as_tibble(permutations(n=6, r=6, v=dice, repeats.allowed = FALSE)) 
+nrow(results)
+```
+Answer 2) 720
