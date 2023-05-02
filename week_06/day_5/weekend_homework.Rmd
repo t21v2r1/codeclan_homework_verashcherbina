@@ -12,8 +12,8 @@ data(msleep)
 ## Q2: Jabberwockies sleep for around 7 hours a night, on average. Perform an appropriate statistical test to determine whether the mean sleep_total in the sampled population of animal types differs from the typical value for jabberwockies.
 
 a = 0.05
-H0: mean sleep_total in the sample differ
-Ha: mean sleep_total in the sample doesn't differ
+H0: mean sleep_total in the sample doesn't differ
+Ha: mean sleep_total in the sample differ
 
 # Jabberwocky is not on data, so we can sample the data without filtering.
 
@@ -52,8 +52,8 @@ null_distribution_sleep %>%
 ```
 
 Answer: p=0. 
-p value is less than or equal to α, so we reject the null hypothesis in favour of the alternative hypothesis.
-Ha is right: average mean sleep total in the sampled population of animal types doesn't differ from the typical value for jabberwockies.
+p value is less than α, so we reject the null hypothesis in favour of the alternative hypothesis.
+Ha is right: average mean sleep total in the sampled population of animal types does differ from the typical value for jabberwockies.
 
 ##Q3
 
@@ -62,8 +62,8 @@ Perform an appropriate statistical test to determine whether omnivores sleep for
 
 ## Q4
 Question 4. Perform an appropriate statistical test to determine whether the proportion of domesticated animal types in the population of animal types is greater than 5%.
-H0: it is greater
-Ha: it is not.
+H0: it is equal
+Ha: it is greater.
 a = 0.05
 
 ```{r}
@@ -95,7 +95,7 @@ null_distribution_dom %>%
 null_distribution_dom %>% 
   get_p_value(obs_stat = observed_stat_animals$prop, direction="greater")
 ```
-p is smaller than our treshold 0.05. We fail to reject the H0, and it means that the population of domesticated types is not greater than 5%.
+p is smaller than our treshold 0.05. We reject the H0, and it means that the population of domesticated types is greater than 5%.
 
 
 
