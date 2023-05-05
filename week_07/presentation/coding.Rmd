@@ -1,0 +1,312 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tsibbledata)
+library(tsibble)
+library(feasts)
+library(lubridate)
+library(magrittr)
+library(scales)
+library(dplyr)
+library(wesanderson)
+library(sf)
+library(shiny)
+library(leaflet)
+library(widgetframe)
+nyc_bikes_df <- nyc_bikes
+```
+
+```{r}
+nyc_bikes_df_demog <- nyc_bikes_df %>% 
+  filter(birth_year >= 1940) %>% 
+  filter(!(gender =="Unknown" & birth_year == "1969"))
+
+```
+
+
+```{r}
+nyc_bikes_df %>%
+  ggplot(aes(x=birth_year, fill=type))+
+  geom_bar()+
+  facet_grid(~gender)+
+  scale_x_continuous()+
+  coord_flip()
+```
+
+```{r}
+nyc_bikes_df %>% 
+    ggplot(aes(x=gender, fill = type))+
+  geom_bar()
+```
+
+```{r}
+nyc_bikes_df_tidy_starts <- nyc_bikes_df %>% 
+  mutate(
+    start_year = year(start_time),
+    start_month = month(start_time, label = TRUE, abbr = TRUE), 
+    start_day = day(start_time), 
+    start_weekday = wday(start_time, label = TRUE, abbr = TRUE),
+    start_hour = hour(start_time),
+    .after="start_time"
+    )
+
+nyc_bikes_df_tidy_starts_ends <- nyc_bikes_df_tidy_starts %>% 
+  mutate(
+    end_year = year(stop_time),
+    end_month = month(stop_time, label = TRUE, abbr = TRUE), 
+    end_day = day(stop_time), 
+    end_weekday = wday(stop_time, label = TRUE, abbr = TRUE),
+    end_hour = hour(stop_time),
+    .after="stop_time"
+    )
+
+nyc_bikes_df_tse_dur <- nyc_bikes_df_tidy_starts_ends %>% 
+  mutate(duration_sec = as.duration(stop_time - start_time), 
+         duration_min = round(as.numeric(duration_sec/60), digits=2), .after="bike_id") 
+
+
+
+```
+```{r}
+mean(nyc_bikes_df_tse_dur$duration_min)
+```
+
+```{r}
+nyc_bikes_df_tse_dur_age <- nyc_bikes_df_tse_dur %>% 
+  mutate(age = round(as.numeric(start_year - birth_year), digits = 0))
+```
+
+```{r}
+nyc_bikes_df_tse_dur_age %>% 
+   ggplot(aes(x=age, fill=type))+
+  geom_bar()+
+  facet_wrap(~gender)+
+  scale_x_continuous()+
+  labs(title = "Bike rental usage (per age and gender)", x="Customer's age", y="Number of rides", fill="Type of subscription")+
+  theme_bw()
+
+ggsave("images/4.png")
+```
+
+
+```{r}
+nyc_bikes_df_tse_dur_age_tidy <- nyc_bikes_df_tse_dur_age %>% 
+  filter(birth_year >= 1940) %>% 
+  filter(!(gender =="Unknown" & birth_year == "1969")) 
+
+nyc_bikes_df_tse_dur_age_tidy %>% 
+   ggplot(aes(x=age, fill=type))+
+  geom_bar()+
+  facet_wrap(~gender)+
+  scale_x_continuous()+
+  labs(title = "Bike rental usage (per age and gender)", x="Customer's age", y="Number of rides", fill="Type of subscription")+
+  theme_bw()
+
+ggsave("images/5.png")
+```
+```{r}
+nyc_timeline <- nyc_bikes_df_tse_dur_age %>% 
+  group_by(start_hour, gender) %>% 
+  count() 
+
+nyc_timeline %>% 
+  ggplot(aes(x=start_hour, y=n))+
+  geom_line(colour='#185B9A')+
+  facet_grid(~gender)+
+  scale_x_continuous(breaks = seq(0,23))+
+  coord_flip()+
+  labs(title = "Bike rental usage", subtitle="(per gender and time of the day)", x="Ride's start time (hour)", y="Number of rides")+
+  theme_bw()
+
+ggsave("images/8.png")
+```
+```{r}
+nyc_bikes_df_tse_dur_age_tidy %>%
+  group_by(age) %>%
+  count() %>% 
+  ggplot(aes(x=age, y=n))+
+  geom_col()
+
+```
+
+
+
+```{r}
+nyc_bikes_ageline <- nyc_bikes_df_tse_dur_age %>% 
+  mutate(age_group =
+           ifelse(age <=25, "<25",
+                  ifelse(age <=35, "25-35",
+                  ifelse(age <=45, "35-45",
+                  ifelse(age <=55, "45-55",
+                  ifelse(age <=65, "55-65", "65+"))))))
+         
+nyc_bikes_ageline %>% 
+  ggplot(aes(x=start_hour, fill=age_group))+
+  geom_bar()+
+  facet_grid(~gender)+
+  scale_x_continuous(breaks = seq(0,23), guide = guide_axis(check.overlap=TRUE))+
+  labs(title = "Bike rental usage", subtitle="(per age group and gender, tidy)", x="Ride's start time (hour)", y="Number of rides", fill="Age group")+
+  theme_bw()
+
+ggsave("images/6.png")
+
+```
+
+```{r}
+nyc_bikes_ageline %>% 
+filter(birth_year >= 1940) %>% 
+filter(!(gender =="Unknown" & birth_year == "1969")) %>% 
+  group_by(age_group) %>% 
+  count() %>% 
+  ggplot(aes(x=age_group, y=n))+
+  geom_col()
+```
+
+```{r}
+nyc_bikes_ageline %>% 
+  ggplot(aes(x=start_hour, fill=age_group))+
+  geom_bar()+
+  scale_x_continuous(breaks = seq(0,23))+
+  coord_flip()
+```
+
+
+```{r}
+nyc_bikes_ageline %>% 
+  ggplot(aes(x=start_month, fill=age_group))+
+  geom_bar()
+```
+```{r}
+nyc_bikes_ageline %>% 
+  filter(birth_year >= 1940) %>% 
+filter(!(gender =="Unknown" & birth_year == "1969")) %>% 
+  ggplot(aes(x=bike_id, fill=age_group))+
+  geom_bar()
+```
+
+```{r}
+nyc_bikes_ageline %>% 
+  filter(birth_year >= 1940) %>% 
+filter(!(gender =="Unknown" & birth_year == "1969")) %>% 
+  ggplot(aes(x=bike_id, fill=gender))+
+  geom_bar()
+```
+```{r}
+nyc_bikes_ageline %>% 
+  ggplot(aes(x=start_hour, fill=bike_id))+
+  geom_bar()
+```
+
+```{r}
+nyc_bikes_ageline %>% 
+  group_by(bike_id, start_hour) %>% 
+  count() %>% 
+  ggplot(aes(x=start_hour, y=n, colour=bike_id))+
+  geom_line()+
+  scale_x_continuous(breaks = seq(0,23))+
+  labs(title = "Rental bike usage during day and night", subtitle="(per bike ID)", x="Ride's start time (hour)", y="Number of rides", colour="Bike ID")+
+  theme_bw()
+
+ggsave("images/7.png")
+
+```
+
+```{r}
+nyc_bikes_ageline_trend <- nyc_bikes_ageline %>% 
+  group_by(start_month) %>% 
+  count() 
+
+
+nyc_bikes_ageline_trend %>% 
+  ggplot(aes(x=start_month, y=n))+
+  geom_col(fill='#185B9A')+
+  labs(
+    title = "Amount of bike rides in 2018 (per month)",
+    x = "",
+    y = "Number of rides")+
+  theme_minimal()
+
+ggsave("1.png")
+
+```
+
+```{r}
+nyc_bikes_ageline %>% 
+  group_by(bike_id, start_month) %>% 
+  count() %>% 
+  ggplot(aes(x=start_month, y=n, fill=bike_id))+
+  geom_col()+
+  labs(title = "Bikes in circulation in 2018 (per month and bike ID)", x="", y="Bikes in circulation", fill="Bike ID")+
+  theme_minimal()
+
+ggsave("images/2.png")
+
+```
+
+```{r}
+nyc_bikes_ageline %>% 
+  group_by(bike_id, start_month) %>% 
+  count() %>% 
+  filter(bike_id == "31681" | bike_id == "31735") %>% 
+  ggplot(aes(x=start_month, y=n, fill=bike_id))+
+  geom_col()
+```
+```{r}
+nyc_bikes_ageline %>%
+  group_by(bike_id, start_station) %>% 
+  count() %>% 
+  ggplot(aes(x=bike_id, y=n, fill=start_station))+
+  geom_col()
+```
+```{r}
+nyc_bikes_ageline_trend2 <- nyc_bikes_ageline %>% 
+  group_by(start_month) %>% 
+  count(bike_id) 
+
+nyc_bikes_ageline_trend %>% 
+  ggplot(aes(x=start_month, y=n))+
+  geom_point()
+```
+```{r}
+nyc_bikes_ageline %>% 
+index_by(start_month) %>% 
+  summarise(count=n_distinct(bike_id)) %>% 
+  ggplot(aes(x=start_month, y=count))+
+  geom_col(fill='#185B9A')+
+  labs(title = "Number of bicycles in circulation in 2018 (per month)", x="", y="Number of bikes in usage")+
+  theme_minimal()
+
+ggsave("images/3.png")
+
+
+```
+```{r}
+nyc_bikes_ageline %>% 
+  filter(start_hour == 8) %>% 
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~start_long,
+                   lat = ~start_lat)
+```
+```{r}
+plot1 <- nyc_bikes_ageline %>% 
+  filter(end_hour == 18) %>% 
+leaflet() %>%
+  addTiles() %>%
+  addCircleMarkers(lng = ~start_long,
+                   lat = ~start_lat)
+widgetframe::frameWidget(plot1)
+```
+
+```{r}
+min_start_lat <- nyc_bikes_ageline %>% 
+  select(start_lat) %>% 
+  order_by(asc(start_lat))
+  slice_max(n=1)
+
+
+```
+
