@@ -12,6 +12,26 @@ editor_options:
     wrap: 72
 ---
 
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE)
+```
+
+```{r}
+library(tsibbledata)
+library(tsibble)
+library(feasts)
+library(lubridate)
+library(magrittr)
+library(scales)
+library(dplyr)
+library(wesanderson)
+library(sf)
+library(shiny)
+library(leaflet)
+library(widgetframe)
+nyc_bikes_df <- nyc_bikes
+```
+
 ## Bike circulation and seasonal usage
 
 Firstly, let's look at the rental bikes usage in 2018.<br> ![alt text
@@ -67,27 +87,52 @@ group also prefer using the bikes only during daytime, and also they are
 mostly men. <br><br> Assumption: safety issues in both scenario?<br>
 
 ## Location
-
 <br>
+Locations of the bikes at 8am.<br>
 
-plot1 <- nyc_bikes_ageline %>%
-  filter(start_hour == 8) %>%
-  leaflet() %>%
+```{r}
+nyc_bikes_df_tidy_starts <- nyc_bikes_df %>% 
+  mutate(
+    start_year = year(start_time),
+    start_month = month(start_time, label = TRUE, abbr = TRUE), 
+    start_day = day(start_time), 
+    start_weekday = wday(start_time, label = TRUE, abbr = TRUE),
+    start_hour = hour(start_time),
+    .after="start_time"
+    )
+
+nyc_bikes_df_tidy_starts_ends <- nyc_bikes_df_tidy_starts %>% 
+  mutate(
+    end_year = year(stop_time),
+    end_month = month(stop_time, label = TRUE, abbr = TRUE), 
+    end_day = day(stop_time), 
+    end_weekday = wday(stop_time, label = TRUE, abbr = TRUE),
+    end_hour = hour(stop_time),
+    .after="stop_time"
+    )
+
+
+nyc_bikes_df_tidy_starts_ends %>% 
+  filter(start_hour == 8) %>% 
+leaflet() %>%
   addTiles() %>%
   addCircleMarkers(lng = ~start_long,
                    lat = ~start_lat)
+```
+<br>
+Locations of the bikes at 6pm.<br>
 
-widgetframe::frameWidget(plot1)
+```{r}
 
-
-plot2 <- nyc_bikes_ageline %>% 
-  filter(end_hour == 18) %>%
-  leaflet() %>%
+nyc_bikes_df_tidy_starts_ends %>% 
+  filter(end_hour == 18) %>% 
+leaflet() %>%
   addTiles() %>%
   addCircleMarkers(lng = ~start_long,
                    lat = ~start_lat)
+```
 
-widgetframe::frameWidget(plot2)
+
 
 ## Conclusions: recommended further research
 
