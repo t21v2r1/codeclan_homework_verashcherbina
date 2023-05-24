@@ -1,0 +1,59 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+```{r}
+library(mosaic) # for model plots
+library(mosaicData) # for our RailTrail data
+library(janitor)
+library(tidyverse)
+library(GGally)
+library(ggfortify)
+```
+
+```{r}
+data <- read_csv("data/housing_prices.csv")
+```
+
+```{r}
+head(data)
+```
+```{r}
+?data
+```
+```{r}
+data_clean <- data %>% 
+  clean_names () 
+data_clean
+```
+```{r}
+alias(lm(total_rooms ~ ., data = data))
+```
+
+```{r}
+data_ocean <- data %>% 
+  mutate(near_ocean = if_else(ocean_proximity == "NEAR BAY", "TRUE", "FALSE"))
+  
+```
+
+```{r warning=FALSE}
+ggpairs(data_ocean)
+```
+```{r}
+data %>% 
+  ggplot(aes(x=median_house_value, y=median_income))+
+  geom_point()+
+  geom_smooth(method = "lm", se = FALSE)
+```
+```{r}
+model <- lm(median_house_value ~ median_income + near_ocean, data = data_ocean)
+
+autoplot(model)
+```
+```{r}
+summary(model)
+```
+```{r}
+plotModel(model)
+```
+
