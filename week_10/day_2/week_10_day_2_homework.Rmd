@@ -30,14 +30,14 @@ data_clean
 alias(lm(total_rooms ~ ., data = data))
 ```
 
-```{r}
-data_ocean <- data %>% 
-  mutate(near_ocean = if_else(ocean_proximity == "NEAR BAY", "TRUE", "FALSE"))
-  
-```
+#```{r}
+#data_ocean <- data %>% 
+#  mutate(near_ocean = if_else(ocean_proximity == "NEAR BAY", "TRUE", "FALSE"))
+#  
+#```
 
 ```{r warning=FALSE}
-ggpairs(data_ocean)
+ggpairs(data)
 ```
 ```{r}
 data %>% 
