@@ -1,0 +1,183 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(GGally)
+library(ggfortify)
+library(modelr)
+```
+
+```{r}
+kc_houses <- read.csv("3_homework/data/kc_house_data.csv")
+```
+
+```{r}
+names(kc_houses)
+head(kc_houses)
+```
+
+```{r}
+ggplot(data=kc_houses, aes(x=price))+
+  geom_histogram()
+```
+
+
+
+Thought at this point
+
+house price is highly right skewes
+potential candidates
+
+size of house (bedrooms, bathrooms)
+location (waterfront, view, lat, long, zip)
+current state(yr_renovated, condition, grade)
+age (yr_built)
+
+Ultimate gosl: build an explanatory model using multiple linear regresion to explain the variation in house price
+
+Explore data further (relatioship between candidates, relatioships between our outcome (price))
+
+-> inform our cleaning
+```{r}
+
+kc_houses %>% 
+count(waterfront)
+
+kc_houses %>% 
+count(view)
+
+kc_houses %>% 
+count(condition)
+
+kc_houses %>% 
+count(grade)
+```
+```{r}
+kc_houses %>% 
+  mutate(has_been_renovated = yr_renovated !=0) %>% 
+  count(has_been_renovated)
+```
+```{r}
+kc_houses_trim <- 
+  kc_houses %>% 
+  mutate(has_been_renovated = yr_renovated !=0)
+```
+
+```{r}
+kc_houses_trim %>% 
+  slice_sample(prop = 0.8) %>% 
+  select(price, bedrooms, bathrooms, sqft_living, sqft_lot, floors, sqft_basement, sqft_above) %>% 
+  ggpairs()
+```
+Potential Top House Size candidate: sqft_living(looks linear and highly correlated)
+
+```{r}
+kc_houses_trim %>% 
+  slice_sample(prop = 0.8) %>% 
+  select(price, waterfront, view, lat, long, zipcode) %>% 
+  ggpairs(progress = FALSE)
+```
+size of house (bedrooms, bathrooms)
+
+```{r}
+kc_houses_trim %>% 
+  slice_sample(prop=0.8) %>% 
+  select(price, has_been_renovated, condition, grade) %>% 
+  ggpairs(progress = FALSE)
+```
+```{r}
+ggplot(kc_houses_trim, aes(yr_built, price))+
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = "lm")
+```
+after exploration, the potentially best candidates for each quality(size, location, condition, age) were found to be: 
+
+```{r}
+kc_houses_trim %>% 
+  select(price, sqft_living, lat, waterfront, grade, yr_built) %>% 
+  mutate(grade = as.factor(grade)) %>% 
+  ggpairs(progress = FALSE)
+```
+
+```{r}
+#create dataset with only candidates
+kc_houses_candidates <- kc_houses_trim %>% 
+  select(price, sqft_living, lat, waterfront, grade, yr_built) %>% 
+  mutate(grade = as.factor(grade))
+```
+
+```{r}
+model_1a <- lm(price ~ sqft_living, data = kc_houses_candidates)
+model_1b <- lm(price ~ yr_built, data = kc_houses_candidates)
+model_1c <- lm(price ~ grade, data = kc_houses_candidates)
+```
+```{r}
+summary(model_1b)
+```
+```{r}
+autoplot(model_1c)
+```
+After investigating the first predictor, model_1a (price ~ sqft_living) resulted in the highest value for r2
+
+# second predictor
+
+```{r}
+model_1 <- lm(log(price) ~ sqft_living, data=kc_houses_candidates)
+```
+
+```{r}
+kc_resid <- kc_houses_candidates %>% 
+  add_residuals(model_1c, var = "resid") %>% 
+  mutate(log_price = log(price)) %>% 
+  select(-sqft_living, -price) 
+
+kc_resid %>% 
+  ggpairs(progress = FALSE)
+```
+```{r}
+model_2a <- lm(log(price) ~ sqft_living + lat, data = kc_houses_candidates)
+model_2b <- lm(log(price) ~ sqft_living + waterfront, data = kc_houses_candidates)
+model_2c <- lm(log(price) ~ sqft_living + grade, data = kc_houses_candidates)
+```
+
+```{r}
+summary(model_2a)
+```
+```{r}
+exp(0.3097)
+```
+```{r}
+autoplot(model_2a)
+```
+```{r}
+summary(model_2c)
+autoplot(model_2c)
+```
+model interpretation
+The price of a house in king county could be explained by a combination of it's size(sqft of the living space) and it's latitude (northerness)
+e.g. for 
+
+```{r}
+head(kc_houses_candidates)
+```
+
+```{r}
+-63.56 + 3863e-04 * 1910 + 1573
+exp(12.98971)
+```
+```{r}
+alias(price ~ ., data = kc_houses_trim)
+```
+alias find perfect correlations. If it's not 
+
+
+```{r}
+exp(12.98971+c(-0.3097, 0.3097))
+```
+```{r}
+summary(model_2a)
+```
+
