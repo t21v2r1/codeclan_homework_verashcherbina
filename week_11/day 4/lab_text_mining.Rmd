@@ -1,0 +1,125 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+## Text Mining Lab
+
+```{r}
+library(tidyverse)
+library(tidytext)
+library(ggwordcloud)
+library(janeaustenr)
+library(hcandersenr)
+library(languageR)
+library(text2vec)
+
+
+
+
+hcandersen_en
+
+head(alice, 20)
+
+glimpse(movie_review)
+```
+```{r}
+alice_book_words <- tibble(book = 'Alice in Wonderland', text = alice)
+```
+
+```{r}
+alice_book_collapsed <- tibble(book = 'Alice in Wonderland',
+                               text = str_c(alice, collapse = ' '))
+```
+```{r}
+glimpse(movie_review)
+movie_review
+```
+
+#1 Word clouds in ggplot
+
+```{r}
+# each row is a line in the book
+littlemermaid <-hcandersen_en %>% 
+  filter(book %in% "The little mermaid") %>% 
+  unnest_tokens(output = word, input = text)
+
+# FREQUENCY AND REMOVED STOP_WORDS 
+little_mermaid_stop <- littlemermaid %>% 
+  count(word, sort = TRUE) %>% 
+  anti_join(stop_words)
+
+ggwordcloud(little_mermaid_stop$word, little_mermaid_stop$n)
+```
+
+# 2
+
+```{r}
+little_mermaid_stop %>% 
+  inner_join(get_sentiments("bing")) %>% 
+  slice_max(n, n = 10) %>% 
+  ggplot() +
+  aes(x = word, y = n, fill = sentiment) +
+  geom_col() +
+  coord_flip()
+```
+
+# 2.1
+
+```{r}
+
+alice_book_collapsed %>% 
+  unnest_tokens(bigram, text, token = "ngrams", n = 2) %>% 
+  separate(bigram, into = c("word1", "word2"), sep = " ") %>% 
+  filter(word1 == "very") %>% 
+  anti_join(get_sentiments("bing"), join_by("word2" == "word"))
+
+```
+
+# 3
+
+```{r}
+alice_book_words
+
+littlemermaid_words <- littlemermaid %>% 
+  rename(text = word)
+
+sensesensibility_words <-  tibble(book = 'Sense and Sensibility', text = sensesensibility)
+
+prideprejudice_words <-  tibble(book = 'Pride and Prejudice', text = prideprejudice)
+
+emma_words <-  tibble(book = 'Emma', text = emma)
+
+books_combined <- bind_rows(alice_book_words, littlemermaid_words, sensesensibility_words, prideprejudice_words, emma_words)
+
+books_combined %>% 
+  count(book)
+
+books_all <- books_combined %>% 
+  unnest_tokens(output = word, input = text)
+
+books_all_stop <- books_all %>% 
+  count(word, sort = TRUE) %>% 
+  anti_join(stop_words) %>% 
+  slice_max(n, n=5)
+
+ggwordcloud(books_all_stop$word, books_all_stop$n)
+```
+
+
+#4
+
+```{r}
+movie_review_unnested <- movie_review %>% 
+  unnest_tokens(output = word, input = review)
+```
+```{r}
+movie_50_words <- movie_review_unnested %>% 
+  count(word, sort=TRUE) %>% 
+  slice_max(n, n=50)
+```
+
+
+
+
+
