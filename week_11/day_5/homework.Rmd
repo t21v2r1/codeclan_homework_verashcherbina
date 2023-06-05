@@ -1,0 +1,49 @@
+---
+title: "Homework"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(textdata)
+library(tidytext)
+library(janeaustenr)
+```
+
+#1
+
+```{r}
+prideandsense1 <- austen_books() %>% 
+  filter(book == c("Sense & Sensibility", "Pride & Prejudice")) %>% 
+  unnest_tokens(output=word, input=text, to_lower = TRUE) 
+
+prideandsensetop100clean <- prideandsense1 %>% 
+ count(word, sort=TRUE) %>% 
+anti_join(stop_words) %>% 
+  slice_max(n, n=100)
+```
+
+#2
+```{r}
+prideandsense2 <- austen_books() %>% 
+  filter(book == c("Sense & Sensibility", "Pride & Prejudice")) %>% 
+  unnest_tokens(output=word, input=text, to_lower = FALSE) 
+
+prideandsensetop100dirty <- prideandsense2 %>% 
+ count(word, sort=TRUE) %>% 
+  slice_max(n, n=100)
+```
+
+#3
+
+```{r}
+prideandsense3 <- austen_books() %>% 
+  filter(book == c("Sense & Sensibility", "Pride & Prejudice")) %>% 
+  unnest_tokens(output=word, input=text, to_lower = FALSE) 
+
+prideandsensesentimentstop100 <- prideandsense3 %>% 
+  inner_join(get_sentiments("bing")) %>% 
+  count(word, sort=TRUE) %>% 
+  slice_max(n, n = 100) 
+```
+
